@@ -1,0 +1,21 @@
+{
+  "name": "enterprise-cognitive-knowledge-assistant",
+  "version": "1.0.0",
+  "description": "Enterprise Cognitive Knowledge Assistant with RAG, Vector Search, Analytics, and Multi-modal AI",
+  "main": "app.py",
+  "scripts": {
+    "dev": ".\\venv\\Scripts\\streamlit.exe run app.py",
+    "start": ".\\venv\\Scripts\\streamlit.exe run app.py",
+    "serve": ".\\venv\\Scripts\\streamlit.exe run app.py",
+    "app": ".\\venv\\Scripts\\streamlit.exe run app.py"
+  },
+  "keywords": [
+    "streamlit",
+    "rag",
+    "ai",
+    "knowledge-assistant",
+    "vector-search"
+  ],
+  "author": "",
+  "license": "ISC"
+}

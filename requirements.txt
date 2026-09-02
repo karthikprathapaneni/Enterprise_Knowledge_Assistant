@@ -1,0 +1,12 @@
+streamlit
+pypdf
+scikit-learn
+numpy
+pandas
+networkx
+matplotlib
+plotly
+firebase-admin
+Pillow
+SpeechRecognition
+pyttsx3
