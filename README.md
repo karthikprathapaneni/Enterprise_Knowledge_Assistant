@@ -1,47 +1,56 @@
 # Enterprise Cognitive Knowledge Assistant 2.0
 > **An Agentic Enterprise AI Intelligence Platform & Cognitive Operating System**  
-> *Transforming organizational documents, structured operational data, and institutional policies into actionable decision intelligence, daily problem solving, and grounded workflows.*
+> *Transforming organizational documents, structured enterprise data, policies, and institutional knowledge into personalized assistance, daily problem-solving runbooks, grounded decision intelligence, and secure agentic workflows.*
 
 ---
 
 ## 🏛️ Cognitive Lifecycle
 
-$$\text{UNDERSTAND} \longrightarrow \text{RETRIEVE} \longrightarrow \text{REASON} \longrightarrow \text{DECIDE} \longrightarrow \text{ACT} \longrightarrow \text{LEARN}$$
+$$\mathbf{UNDERSTAND} \longrightarrow \mathbf{RETRIEVE} \longrightarrow \mathbf{REASON} \longrightarrow \mathbf{DECIDE} \longrightarrow \mathbf{ACT} \longrightarrow \mathbf{LEARN}$$
 
 ```mermaid
 graph TD
-    UI["🌐 Enterprise Experience Tier (Streamlit + Cyber-Executive Glassmorphism)"]
+    UI["🌐 Enterprise Experience Tier (Streamlit + Institutional Executive Aesthetic)"]
     
-    subgraph "🛡️ Security & Governance"
+    subgraph "🛡️ Governance, Security & Clearance Tier"
         GUARD["AIGuard.py (Prompt Injection & Jailbreak Firewall)"]
         PERM["Permission-Aware RAG (Clearance Tiers 1–3)"]
-        AUDIT["Security Audit Ledger & Human Review Queue"]
+        AUDIT["Security Audit Ledger & Human-in-the-Loop Review Queue"]
     end
 
-    subgraph "🤖 AI Orchestration Tier"
-        ORCH["AIOrchestrator.py (Intent Detection)"]
-        K_AGENT["🧠 Knowledge Agent"]
-        P_AGENT["⚖️ Policy Compliance Agent"]
-        PS_AGENT["🛠️ Problem Solver Agent"]
-        DA_AGENT["📊 Data Analyst Agent (Text-to-SQL)"]
-        T_AGENT["✅ Task & Workflow Agent"]
-        D_AGENT["📄 Document Intelligence Agent"]
+    subgraph "🤖 AI Orchestration & Agent Dispatch Tier"
+        ORCH["AIOrchestrator.py (Intent Classifier & Route Dispatcher)"]
+        K_AGENT["🧠 Knowledge Agent (Enterprise Docs)"]
+        P_AGENT["⚖️ Policy Compliance Agent (Rules & Clearance)"]
+        PS_AGENT["🛠️ Problem Solver Agent (Root Cause & SOPs)"]
+        DA_AGENT["📊 Data Analyst Agent (Safe Read-Only SQL)"]
+        T_AGENT["✅ Task & Workflow Agent (Action Items)"]
+        D_AGENT["📄 Document Intelligence Agent (Cards & Gaps)"]
     end
 
-    subgraph "🧠 Knowledge & Data Intelligence"
+    subgraph "🧠 Knowledge, Graph & Data Intelligence"
         VEC["RAGEngine.py (Hybrid Lexical-Vector RRF Store)"]
-        GRAPH["SemanticGraphRAG.py (Directed Entity Triples)"]
-        SQL_DB["database.py (SQLite Structured Financial/Ops Data)"]
-        CLOUD["firebase_manager.py (Google Cloud Firestore Sync)"]
+        GRAPH["SemanticGraphRAG.py (Directed Entity Triples & Multi-Hop)"]
+        DOC_PROC["document_processor.py (PDF / DOCX / XLSX / CSV / TXT / MD)"]
+        SQL_DB["database.py (SQLite Financial/Ops Ledger Tables)"]
+        CLOUD["firebase_manager.py (Google Cloud Firestore Dual-Mode Sync)"]
+    end
+
+    subgraph "🔊 Voice & Headless Interfaces"
+        VOICE["voice_assistant.py (Web Speech Dictation & Audio Briefing)"]
+        REST_API["api_service.py (Zero-Dependency JSON REST API Server)"]
     end
 
     UI --> GUARD
+    UI <--> VOICE
+    REST_API --> ORCH
     GUARD --> ORCH
     ORCH --> K_AGENT & P_AGENT & PS_AGENT & DA_AGENT & T_AGENT & D_AGENT
     K_AGENT & P_AGENT --> PERM --> VEC
     PS_AGENT --> VEC
     DA_AGENT --> SQL_DB
     T_AGENT --> SQL_DB
+    D_AGENT --> DOC_PROC
     GRAPH --> VEC
     SQL_DB --> CLOUD
 ```
@@ -50,20 +59,40 @@ graph TD
 
 ## 🌟 Key Technical Innovations
 
-1. **AI Orchestration & Dynamic Multi-Agent Routing**:
-   - Natural language queries are classified by intent and routed to specialized domain agents (`Knowledge`, `Policy`, `Problem Solver`, `Data Analyst`, `Task Agent`, `Document Agent`).
-2. **Hybrid Retrieval with Reciprocal Rank Fusion (RRF)**:
-   - Fuses keyword frequency matching with TF-IDF dense cosine similarity using $RRF(d) = \sum \frac{1}{60 + rank(d)}$ for sub-3ms latency and zero hallucination.
-3. **Directed GraphRAG**:
-   - Extracts typed semantic triples (`eligible_for`, `requires`, `governed_by`, `limited_by`, `escalates_to`) and renders interactive 2D networks with multi-hop context tracing.
-4. **Natural Language Data Analyst (Safe Text-to-SQL)**:
-   - Compiles plain English inquiries into validated, read-only SQL queries against enterprise ledger tables with AST/regex safety guardrails and instant Plotly charts.
-5. **Decision Intelligence & Tradeoff Matrix**:
-   - Compares strategic dilemmas across Cost, Risk, Compliance, and Complexity while strictly distinguishing **[FACT]**, **[INFERENCE]**, and **[RECOMMENDATION]**.
-6. **Permission-Aware RAG & AI Security Guard**:
-   - Enforces document-level and chunk-level security clearance filters (Tiers 1–3) before vector matching. AI Guard blocks prompt injections and exfiltration attempts in real time.
-7. **Proactive Intelligence & Workplace Problem Solving**:
-   - Automated detection of cross-document policy conflicts, knowledge coverage gaps, and step-by-step diagnostic runbooks for operational roadblocks.
+### 1. AI Orchestrator & Dynamic Multi-Agent Routing
+- Inbound inquiries are classified by intent (`KNOWLEDGE`, `POLICY_COMPLIANCE`, `PROBLEM_SOLVER`, `DATA_ANALYST`, `TASK_AGENT`, `DOCUMENT_INTELLIGENCE`) and dynamically assigned to domain agents with tailored system prompts, context constraints, and reasoning chains.
+
+### 2. Hybrid Lexical-Vector Retrieval with Reciprocal Rank Fusion (RRF)
+- Combines keyword frequency scoring with TF-IDF cosine similarity across n-grams (1, 2) using reciprocal rank fusion:
+  $$RRF(d) = \sum_{m \in M} \frac{1}{60 + \text{rank}_m(d)}$$
+  Ensuring sub-3ms retrieval latency, zero hallucination, and strictly grounded citations.
+
+### 3. Directed Semantic GraphRAG
+- Extracts typed semantic triples (`eligible_for`, `requires`, `governed_by`, `limited_by`, `escalates_to`, `manages`) from unstructured policies and renders interactive 2D networks with multi-hop context tracing.
+
+### 4. Multi-Format Enterprise Ingestion (Zero Heavy C++ Dependencies)
+- Ingests **PDF**, **Microsoft Word (`.docx`)** via native XML namespace extraction, **Excel (`.xlsx`, `.xls`)**, **CSV**, and **Markdown/TXT**. Tabular rows are converted into dense semantic sentences: `[Record #N] column: value • column: value`, allowing hybrid vector indexing of structured files.
+
+### 5. Multimodal Visual Error Diagnostics
+- Inspects uploaded error screenshots and log snippets, automatically categorizing root causes (e.g., VPN Error 809, NAT traversal failure, SSL handshake timeout) and retrieving grounded SOP runbooks.
+
+### 6. Voice Assistant (Hands-Free Dictation & Audio Narration)
+- Powered by HTML5 Web Speech Recognition for real-time speech-to-text dictation and Web Speech Synthesis for 1-click audio narration (`"🔊 Listen to Briefing"`).
+
+### 7. Safe Read-Only Text-to-SQL Data Analyst
+- Compiles natural language questions into validated SQL queries against enterprise financial and operational ledgers. Prohibits destructive commands (`DROP`, `DELETE`, `INSERT`, `ALTER`, `UPDATE`) with regex and AST safety guardrails, outputting instant Plotly visualizations.
+
+### 8. Decision Intelligence & Tradeoff Matrix
+- Structures complex dilemmas across Cost, Risk, Compliance, and Complexity while enforcing strict epistemological boundaries:
+  - **`[FACT]`**: Directly extracted from indexed sources with explicit citations.
+  - **`[INFERENCE]`**: Logical reasoning synthesized from corroborated facts.
+  - **`[RECOMMENDATION]`**: Actionable guidance flagged for human authorization.
+
+### 9. Permission-Aware Clearance RAG & AI Security Guard
+- Evaluates user security tiers (Tier 1: Standard, Tier 2: Manager, Tier 3: Executive) at the retrieval level before vector matching. AI Guard blocks prompt injections, jailbreaks, and system override attempts in real time with automated audit logging.
+
+### 10. Headless JSON REST API Service
+- Exposes enterprise AI capabilities over clean, stateless REST endpoints for external system integrations and enterprise microservices.
 
 ---
 
@@ -71,20 +100,54 @@ graph TD
 
 | Portal | Source File | Core Capabilities |
 | :--- | :--- | :--- |
-| **🏠 Command Center** | `command_center.py` | Mission control pulse: attention items, proactive alerts, vault vitals, and 1-click launches. |
-| **🧠 My AI Assistant** | `personal_assistant.py` | Personalized work hub: role clearance, pending action items, and conversational copilot. |
-| **📚 Knowledge Vault** | `dashboard.py` | 1-click repository file scanner, sliding-window chunker, Plotly vector analytics, and tuning presets. |
-| **💬 Cognitive Copilot** | `chat.py` | Multi-agent orchestrated copilot with grounded evidence citations and inline charts. |
-| **🛠️ AI Problem Solver** | `problem_solver.py` | Root-cause analysis, step-by-step remediation runbooks, multimodal screenshot diagnostics, and support escalation. |
-| **📄 Document Intelligence** | `document_intelligence_portal.py` | Document intelligence cards, 1-click document explainer, conflict detector, and knowledge gap analyzer. |
-| **🕸️ Knowledge Graph** | `graph.py` | Directed GraphRAG visualizer with typed relationships and multi-hop path query. |
-| **📊 AI Data Analyst** | `data_analyst.py` | Safe read-only Text-to-SQL engine executing on structured financial/operational ledger tables. |
+| **🏠 Command Center** | `command_center.py` | Mission control pulse: priority attention items, proactive alerts, knowledge health vitals, and 1-click launches. |
+| **🧠 My AI Assistant** | `personal_assistant.py` | Personalized work hub: role clearance, pending action items, frequently accessed knowledge, and personalized copilot. |
+| **📚 Knowledge Vault** | `dashboard.py` | Multi-format uploader (PDF/DOCX/XLSX/CSV/TXT), repository scanner, chunk inspector, and vector analytics. |
+| **💬 Cognitive Copilot** | `chat.py` | Multi-agent conversational copilot with voice dictation, grounded citations, inline charts, and audio narration. |
+| **🛠️ AI Problem Solver** | `problem_solver.py` | Operational diagnostics, step-by-step remediation runbooks, multimodal visual telemetry, and human escalation. |
+| **📄 Document Intelligence** | `document_intelligence_portal.py` | Structured intelligence summaries, 1-click document explainer, policy conflict detector, and knowledge gap analyzer. |
+| **🕸️ Knowledge Graph** | `graph.py` | Directed GraphRAG visualizer with typed relationships, density metrics, and multi-hop neighborhood tracing. |
+| **📊 AI Data Analyst** | `data_analyst.py` | Safe read-only Text-to-SQL engine executing on structured financial/operational ledger tables with Plotly charts. |
 | **🎯 Decision Center** | `decision_center.py` | Multi-criteria tradeoff matrix with Fact/Inference/Recommendation separation and HITL review queue. |
 | **🏢 Department Workspaces** | `department_workspaces.py` | Scoped knowledge environments for HR, Finance, IT, Compliance, and Executive leadership. |
 | **🔔 Intelligence Alerts** | `alerts_portal.py` | Proactive notification stream with 1-click task conversion and administrative broadcasting. |
 | **📈 RAG Evaluation & ROI** | `rag_evaluator.py` | Precision (92.8%), groundedness (95.6%), citation coverage (98.5%), and hours saved ROI scorecard. |
-| **🎬 Guided Product Tour** | `demo_mode.py` | 10-step interactive guided showcase demonstrating the full cognitive lifecycle for evaluators. |
-| **🛡️ Governance & Security** | `admin.py` | AI Guard threat table, observability request traces, audit ledger, and Cloud Firestore sync. |
+| **🎬 Showcase & Persona Demos** | `demo_mode.py` | 10-phase cognitive lifecycle tracker and 6 real-world persona scenarios with audio narration. |
+| **🛡️ Governance & Security** | `admin.py` | AI Guard threat table, observability request traces, audit ledger, Cloud Firestore sync, and REST API Sandbox. |
+
+---
+
+## 🎭 6 Real-World Persona Scenarios
+
+Demonstrate end-to-end capabilities through the **Showcase Portal** (`demo_mode.py`):
+
+1. **New Employee Onboarding**: Resolves mandatory joining procedures, IT assets, and produces checklist tasks with deadlines.
+2. **Daily IT Roadblock (VPN Error 809)**: Diagnoses Windows IKEv2 NAT-T registry flags, yields step-by-step resolution, and provides escalation links.
+3. **Manager Reimbursement Audit**: Analyzes flight/hotel travel expense rules, identifies ₹5,000/day policy caps, and evaluates compliance.
+4. **Regulatory Policy Conflict**: Pinpoints contradictions between remote work guidelines (3 days/week vs. 2 days/week) across two official documents.
+5. **Natural Language Cloud Spend**: Generates validated read-only SQL, aggregates compute spend by department, and renders a Plotly comparison chart.
+6. **Executive Risk Pulse**: Synthesizes unmitigated compliance vulnerabilities, knowledge gaps, and expiring certifications for C-suite briefings.
+
+---
+
+## 🌐 Enterprise REST API Endpoints
+
+The system includes a zero-dependency headless REST API service (`api_service.py`):
+
+| Endpoint | Method | Description |
+| :--- | :--- | :--- |
+| `/api/health` | `GET` | Service status, active version, and subsystem health check. |
+| `/api/auth/login` | `POST` | Authenticates username/password and returns clearance profile. |
+| `/api/documents` | `GET` | Returns list of indexed enterprise documents and chunk statistics. |
+| `/api/search` | `GET` | Hybrid vector search query with relevance scores and citations. |
+| `/api/chat` | `POST` | Dispatches query through AI Orchestrator with domain agent selection. |
+| `/api/problem-solver`| `POST` | Diagnoses operational roadblock and returns step-by-step runbook. |
+| `/api/graph` | `GET` | Returns directed semantic knowledge graph nodes and typed edges. |
+| `/api/tasks` | `GET` | Retrieves active enterprise tasks, priorities, and deadlines. |
+| `/api/tasks/create` | `POST` | Creates a new actionable workflow task linked to evidence. |
+| `/api/analytics` | `GET` | Returns RAG evaluation metrics and productivity ROI numbers. |
+
+*(Test all endpoints interactively in **Governance & Security** → **Tab 7: REST API Sandbox**).*
 
 ---
 
@@ -92,7 +155,7 @@ graph TD
 
 ### 1. Prerequisites
 - Python 3.10+
-- Windows, macOS, or Linux
+- Modern Web Browser (Chrome, Edge, Firefox, Safari)
 
 ### 2. Setup Virtual Environment
 ```bash
@@ -110,43 +173,58 @@ pip install -r requirements.txt
 
 ### 3. Launch the Application
 ```bash
-# Launch Streamlit server
+# Launch Streamlit web portal
 streamlit run app.py
-# Or run on Windows
+# Or launch on Windows via launcher batch script
 run_app.bat
 ```
 Open **[http://localhost:8501](http://localhost:8501)** in your browser.
 
+### 4. (Optional) Run Headless REST API Server
+```bash
+python api_service.py
+```
+API server listens on **[http://localhost:8000](http://localhost:8000)**.
+
 ---
 
-## 🔐 Demo Credentials & Clearance Tiers
+## 🔐 Credentials & Security Clearance
 
 | Role | Username | Password | Clearance Level | Access Scope |
 | :--- | :--- | :--- | :--- | :--- |
-| **Admin / Executive** | `admin` | `admin123` | **Tier 3 (Root)** | Full access, audit purge, cloud sync, executive compensation data |
+| **Admin / Executive** | `admin` | `admin123` | **Tier 3 (Executive)** | Unrestricted access, audit purge, cloud sync, executive compensation data |
 | **Director / Manager** | `manager` | `manager123` | **Tier 2 (Manager)** | Departmental approvals, operational runbooks, team tasks |
 | **Specialist / User** | `user` | `user123` | **Tier 1 (Standard)** | General policies, personal copilot, permitted document queries |
 
-*(You can also use the 1-click **Admin Demo Access** and **User Demo Access** buttons on the login portal).*
+*(1-click demo buttons are provided on the Login screen for instant testing).*
 
 ---
 
 ## 🧪 Automated Integration Tests
 
-Run the complete 2.0 automated test suite:
+Run the master 9-subsystem test suite:
 ```bash
-python scratch/test_2_0_suite.py
+python test_enterprise_2_0.py
 ```
 **Verification Results:**
 * Database & Schema: **PASSED**
 * AI Guard Prompt Injection Firewall: **PASSED** (Risk score: 0.88 blocked)
-* Safe Text-to-SQL Guardrails: **PASSED** (Destructive SQL blocked)
+* Safe Text-to-SQL Guardrails: **PASSED** (Destructive commands blocked)
 * Permission-Aware RAG: **PASSED** (Tier 1 denied access to Tier 3 records)
 * Orchestrator Intent Routing: **PASSED** (100% accuracy)
 * Semantic GraphRAG: **PASSED** (13 nodes, 10 typed directed edges)
 * Document Intelligence & Gaps: **PASSED** (Card generated, 4 gaps flagged)
+* Multi-Format Ingestion: **PASSED** (DOCX and Tabular CSV parsed)
+* Enterprise REST API Endpoints: **PASSED** (Health and Graph 200 OK)
 
 ---
 
-## 📜 License
+## 📜 Design Standards & Accessibility
+- **Classic Institutional Aesthetic**: Designed with restrained, executive slate palettes (`#0F172A`, `#1E293B`, `#F8FAFC`), crisp 1px borders, and high-contrast typography (`Plus Jakarta Sans`, `JetBrains Mono`).
+- **WCAG AAA Compliance**: Strict >12:1 contrast ratio across both Dark and Light themes.
+- **Dual Cloud/Local Synchronization**: Fully functional in offline standalone local mode (SQLite) with optional live Google Cloud Firestore synchronization.
+
+---
+
+## ⚖️ License
 ISC License • Enterprise Cognitive Knowledge Platform
