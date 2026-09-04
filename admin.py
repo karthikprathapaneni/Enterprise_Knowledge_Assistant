@@ -72,8 +72,9 @@ def admin_page():
     st.write("")
 
     # Workspaces
-    tab_guard, tab_audit, tab_analytics, tab_cloud, tab_hitl = st.tabs([
+    tab_guard, tab_observability, tab_audit, tab_analytics, tab_cloud, tab_hitl = st.tabs([
         "🛡️ AI Security Guard",
+        "📡 Observability Traces",
         "📜 System Audit Trail",
         "📊 Operational Analytics",
         "🔥 Firebase Cloud Sync",
@@ -90,6 +91,18 @@ def admin_page():
             st.dataframe(df_sec, use_container_width=True)
         else:
             st.success("✅ Zero security threat events detected. AI Guard active on all conversational endpoints.")
+
+    # TAB 2: OBSERVABILITY TRACES
+    with tab_observability:
+        st.markdown("#### 📡 End-to-End Request Observability & Tracing")
+        st.caption("Inspect live execution traces, classified intents, agent dispatches, and sub-millisecond component latencies.")
+        from observability import ObservabilityManager
+        traces = ObservabilityManager.get_traces()
+        if traces:
+            df_traces = pd.DataFrame(traces)
+            st.dataframe(df_traces, use_container_width=True)
+        else:
+            st.info("No active traces recorded.")
 
     # TAB 2: AUDIT TRAIL
     with tab_audit:

@@ -127,10 +127,12 @@ def chat_page():
         matches = orch_res.get("matches", [])
         struct_data = orch_res.get("structured_data", None)
 
+        trace_id = orch_res.get("trace_id", "TRC-EXEC")
         msg_payload = {
             "role": "assistant",
             "content": answer_text,
             "agent_name": agent_name,
+            "trace_id": trace_id,
             "matches": matches,
             "structured_data": struct_data
         }
@@ -140,7 +142,7 @@ def chat_page():
         save_chat(username, question, answer_text)
 
         with st.chat_message("assistant"):
-            st.caption(f"Agent: **{agent_name}**")
+            st.caption(f"Agent: **{agent_name}** • Observability Trace: `{trace_id}`")
             st.markdown(answer_text)
 
             if struct_data is not None and not struct_data.empty:

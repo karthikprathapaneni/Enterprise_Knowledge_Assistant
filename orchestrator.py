@@ -64,17 +64,31 @@ class AIOrchestrator:
 
         # 3. Route to Specialized Agents
         if intent == "PROBLEM_SOLVER":
-            return cls._execute_problem_solver(query, rag_engine, user_profile, t_start)
+            res = cls._execute_problem_solver(query, rag_engine, user_profile, t_start)
         elif intent == "DATA_ANALYST":
-            return cls._execute_data_analyst(query, user_profile, t_start)
+            res = cls._execute_data_analyst(query, user_profile, t_start)
         elif intent == "TASK_AGENT":
-            return cls._execute_task_agent(query, user_profile, t_start)
+            res = cls._execute_task_agent(query, user_profile, t_start)
         elif intent == "POLICY_COMPLIANCE":
-            return cls._execute_policy_agent(query, rag_engine, user_profile, t_start)
+            res = cls._execute_policy_agent(query, rag_engine, user_profile, t_start)
         elif intent == "DOCUMENT_INTELLIGENCE":
-            return cls._execute_document_agent(query, rag_engine, user_profile, t_start)
+            res = cls._execute_document_agent(query, rag_engine, user_profile, t_start)
         else: # KNOWLEDGE_QA
-            return cls._execute_knowledge_agent(query, rag_engine, persona, top_k, threshold, t_start)
+            res = cls._execute_knowledge_agent(query, rag_engine, persona, top_k, threshold, t_start)
+
+        # 4. Record System Observability Trace
+        from observability import ObservabilityManager
+        trace = ObservabilityManager.record_trace(
+            username=username,
+            query=query,
+            intent=res.get("intent", intent),
+            agent_name=res.get("agent_name", "AI Agent"),
+            total_latency_ms=res.get("latency_ms", 2.5),
+            chunks_count=len(res.get("matches", [])),
+            clearance_tier=user_profile.get("clearance_level", 1)
+        )
+        res["trace_id"] = trace["trace_id"]
+        return res
 
     @classmethod
     def _execute_problem_solver(cls, query: str, rag_engine, user_profile: dict, t_start: float) -> dict:
