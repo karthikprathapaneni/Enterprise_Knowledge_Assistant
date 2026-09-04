@@ -30,7 +30,7 @@ def rag_evaluator_page():
         st.markdown(f"""
             <div class="ai-card">
                 <span class="ai-metric-label">Retrieval Precision</span>
-                <div class="ai-metric-value" style="color: #34d399;">{precision_rate}%</div>
+                <div class="ai-metric-value">{precision_rate}%</div>
                 <span class="ai-badge badge-active">High Accuracy</span>
             </div>
         """, unsafe_allow_html=True)
@@ -38,7 +38,7 @@ def rag_evaluator_page():
         st.markdown(f"""
             <div class="ai-card">
                 <span class="ai-metric-label">Evidence Groundedness</span>
-                <div class="ai-metric-value" style="color: #818cf8;">{groundedness_score}%</div>
+                <div class="ai-metric-value">{groundedness_score}%</div>
                 <span class="ai-badge badge-indigo">Zero Hallucination</span>
             </div>
         """, unsafe_allow_html=True)
@@ -46,7 +46,7 @@ def rag_evaluator_page():
         st.markdown(f"""
             <div class="ai-card">
                 <span class="ai-metric-label">Citation Coverage</span>
-                <div class="ai-metric-value" style="color: #c084fc;">{citation_coverage}%</div>
+                <div class="ai-metric-value">{citation_coverage}%</div>
                 <span class="ai-badge badge-purple">Audit Verified</span>
             </div>
         """, unsafe_allow_html=True)
@@ -54,7 +54,7 @@ def rag_evaluator_page():
         st.markdown(f"""
             <div class="ai-card">
                 <span class="ai-metric-label">Estimated Time Saved</span>
-                <div class="ai-metric-value" style="color: #fbbf24;">{estimated_hours_saved} hrs</div>
+                <div class="ai-metric-value">{estimated_hours_saved} hrs</div>
                 <span class="ai-badge badge-amber">Productivity ROI</span>
             </div>
         """, unsafe_allow_html=True)
@@ -113,13 +113,13 @@ def rag_evaluator_page():
         with r_col1:
             st.markdown(f"""
                 <div class="ai-card" style="margin-bottom: 14px;">
-                    <div style="font-weight: 700; color: #10b981; font-size: 1.1rem; margin-bottom: 6px;">
+                    <div class="ai-title" style="font-size: 1.1rem; margin-bottom: 6px;">
                         💰 Quantifiable Productivity Savings
                     </div>
-                    <p style="color: #94a3b8; font-size: 0.9rem;">
+                    <p class="ai-subtitle" style="margin: 0 0 10px 0;">
                     By automating routine policy queries, diagnosing IT connectivity roadblocks, and synthesizing executive document briefings:
                     </p>
-                    <ul style="color: #cbd5e1; font-size: 0.88rem; line-height: 1.6;">
+                    <ul class="ai-body" style="padding-left: 20px; line-height: 1.6; margin: 0;">
                         <li><b>{estimated_hours_saved} cumulative employee hours saved</b> this reporting period.</li>
                         <li><b>82% faster mean-time-to-resolution (MTTR)</b> on remote VPN and SSO credentials tickets.</li>
                         <li><b>Zero compliance infractions</b> recorded from out-of-date policy citations.</li>

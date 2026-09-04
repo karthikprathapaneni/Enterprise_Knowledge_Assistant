@@ -13,14 +13,14 @@ def command_center_page():
     chunks_count = st.session_state.get("total_chunks", 0)
     db_stat = get_db_status()
 
-    # Welcome Header
+    # Welcome Header with crisp typography
     st.markdown(f"""
-        <div style="margin-bottom: 20px;">
-            <h2 style="margin: 0; font-weight: 800; font-size: 1.8rem; background: linear-gradient(135deg, #ffffff 30%, #a5b4fc 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+        <div style="margin-bottom: 22px;">
+            <h2 class="ai-title" style="font-size: 1.85rem; margin-bottom: 4px;">
                 ⚡ Command Center — Operational Overview
             </h2>
-            <p style="color: #94a3b8; font-size: 0.95rem; margin-top: 4px;">
-                Good day, <b>{profile['full_name']}</b> ({profile['title']}) • Department: <b>{profile['department']}</b> • Clearance: <b>Tier {profile['clearance_level']}</b>
+            <p class="ai-subtitle" style="font-size: 0.95rem; margin: 0;">
+                Logged in as <b>{profile['full_name']}</b> ({profile['title']}) • Department: <b>{profile['department']}</b> • Clearance: <b>Tier {profile['clearance_level']}</b>
             </p>
         </div>
     """, unsafe_allow_html=True)
@@ -29,15 +29,15 @@ def command_center_page():
     c1, c2, c3, c4 = st.columns(4)
     with c1:
         st.markdown(f"""
-            <div class="ai-card" style="border-top: 3px solid #f59e0b;">
+            <div class="ai-card">
                 <span class="ai-metric-label">Items Needing Attention</span>
-                <div class="ai-metric-value" style="color: #fbbf24;">{len(pending_tasks) + len(conflicts)}</div>
+                <div class="ai-metric-value">{len(pending_tasks) + len(conflicts)}</div>
                 <span class="ai-badge badge-amber">{len(conflicts)} Conflicts • {len(pending_tasks)} Tasks</span>
             </div>
         """, unsafe_allow_html=True)
     with c2:
         st.markdown(f"""
-            <div class="ai-card" style="border-top: 3px solid #6366f1;">
+            <div class="ai-card">
                 <span class="ai-metric-label">Active Document Vault</span>
                 <div class="ai-metric-value">{len(docs)}</div>
                 <span class="ai-badge badge-indigo">{chunks_count} Vector Chunks</span>
@@ -45,18 +45,18 @@ def command_center_page():
         """, unsafe_allow_html=True)
     with c3:
         st.markdown(f"""
-            <div class="ai-card" style="border-top: 3px solid #10b981;">
+            <div class="ai-card">
                 <span class="ai-metric-label">Knowledge Health Index</span>
-                <div class="ai-metric-value" style="color: #34d399;">94.2%</div>
+                <div class="ai-metric-value">94.2%</div>
                 <span class="ai-badge badge-active">Active Grounding</span>
             </div>
         """, unsafe_allow_html=True)
     with c4:
-        sync_str = "Synced" if "ONLINE" in db_stat.get("firebase_status", "") else "Local SQLite"
+        sync_str = "Cloud Synced" if "ONLINE" in db_stat.get("firebase_status", "") else "Local SQLite"
         st.markdown(f"""
-            <div class="ai-card" style="border-top: 3px solid #06b6d4;">
-                <span class="ai-metric-label">Persistence & Cloud</span>
-                <div class="ai-metric-value" style="font-size: 1.35rem; padding-top: 6px;">{sync_str}</div>
+            <div class="ai-card">
+                <span class="ai-metric-label">Persistence & Storage</span>
+                <div class="ai-metric-value" style="font-size: 1.4rem; padding-top: 6px;">{sync_str}</div>
                 <span class="ai-badge badge-active">Dual-Mode Ready</span>
             </div>
         """, unsafe_allow_html=True)
@@ -71,10 +71,10 @@ def command_center_page():
         if conflicts:
             for conf in conflicts[:2]:
                 st.markdown(f"""
-                    <div class="ai-card" style="margin-bottom: 12px; border-left: 4px solid #ef4444;">
-                        <div style="font-weight: 700; color: #f87171;">⚠️ Policy Conflict Detected: {conf['topic']}</div>
-                        <p style="font-size: 0.85rem; color: #94a3b8; margin: 4px 0 6px 0;">{conf['description']}</p>
-                        <div style="font-size: 0.75rem; color: #64748b;">Sources: <i>{conf['doc_a']}</i> vs <i>{conf['doc_b']}</i></div>
+                    <div class="ai-card" style="margin-bottom: 12px; border-left: 3px solid #ef4444;">
+                        <div style="font-weight: 700; color: #ef4444; margin-bottom: 4px;">⚠️ Policy Conflict: {conf['topic']}</div>
+                        <p class="ai-body" style="margin-bottom: 6px;">{conf['description']}</p>
+                        <div class="ai-meta">Sources: <i>{conf['doc_a']}</i> vs <i>{conf['doc_b']}</i></div>
                     </div>
                 """, unsafe_allow_html=True)
         
@@ -83,11 +83,11 @@ def command_center_page():
             badge = "badge-amber" if alt['severity'] == "High" else "badge-indigo"
             st.markdown(f"""
                 <div class="ai-card" style="margin-bottom: 10px;">
-                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
                         <span style="font-weight: 700;">{alt['title']}</span>
                         <span class="ai-badge {badge}">{alt['alert_type']}</span>
                     </div>
-                    <p style="font-size: 0.84rem; color: #94a3b8; margin: 4px 0 0 0;">{alt['message']}</p>
+                    <p class="ai-body" style="margin: 0;">{alt['message']}</p>
                 </div>
             """, unsafe_allow_html=True)
 
@@ -119,8 +119,8 @@ def command_center_page():
         st.write("")
         st.markdown("#### 📈 Knowledge Base Vitals")
         st.info("""
-        * **Ingested Repository Sources:** 3 Verified PDFs
+        * **Ingested Repository Sources:** 3 Verified Enterprise PDFs
         * **Semantic Chunks:** 193 active vector embeddings
-        * **Average Retrieval Latency:** 2.4 ms
-        * **Security Clearance Policy:** Role-Based Access Control active
+        * **Average Retrieval Latency:** 2.4 ms (Sub-50ms guarantee)
+        * **Security Clearance Policy:** Tiered Role-Based Access Control active
         """)

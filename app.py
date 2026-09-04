@@ -53,9 +53,12 @@ else:
     st.session_state.user_profile = profile
 
     st.sidebar.markdown("""
-        <div style="padding: 8px 0 12px 0;">
-            <span style="font-size: 1.22rem; font-weight: 800; background: linear-gradient(135deg, #6366f1, #a855f7); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">⚡ COGNITIVE 2.0</span>
-            <div style="font-size: 0.72rem; color: #94a3b8; margin-top: 1px;">Agentic Enterprise Operating System</div>
+        <div style="padding: 6px 0 14px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.08); margin-bottom: 12px;">
+            <div style="display: flex; align-items: center; gap: 8px;">
+                <span style="font-size: 1.25rem;">⚡</span>
+                <span class="ai-title" style="font-size: 1.15rem; font-weight: 800; margin: 0; letter-spacing: -0.01em;">COGNITIVE 2.0</span>
+            </div>
+            <div class="ai-meta" style="margin-top: 3px; font-size: 0.72rem;">Agentic Enterprise Operating System</div>
         </div>
     """, unsafe_allow_html=True)
 

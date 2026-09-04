@@ -37,16 +37,16 @@ def alerts_portal_page():
             border_col = "#ef4444" if alt["severity"] == "High" else "#6366f1"
 
             st.markdown(f"""
-                <div class="ai-card" style="margin-bottom: 14px; border-left: 4px solid {border_col}; opacity: {0.75 if is_read else 1.0};">
-                    <div style="display: flex; justify-content: space-between; align-items: center;">
-                        <span style="font-weight: 700; font-size: 1.05rem;">{alt['title']}</span>
+                <div class="ai-card" style="margin-bottom: 14px; border-left: 3px solid {border_col}; opacity: {0.75 if is_read else 1.0};">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                        <span class="ai-title" style="font-size: 1.05rem; margin: 0;">{alt['title']}</span>
                         <div>
                             <span class="ai-badge {sev_badge}">{alt['severity']} Priority</span>
                             <span class="ai-badge badge-purple">{alt['alert_type']}</span>
                         </div>
                     </div>
-                    <p style="color: #cbd5e1; font-size: 0.9rem; margin: 8px 0;">{alt['message']}</p>
-                    <div style="font-size: 0.75rem; color: #94a3b8;">
+                    <p class="ai-body" style="margin: 8px 0;">{alt['message']}</p>
+                    <div class="ai-meta">
                         Target Audience: <b>{alt['target_role']}</b> • Recorded: <i>{alt['created_at']}</i> • Status: <b>{'Read' if is_read else 'Unread'}</b>
                     </div>
                 </div>

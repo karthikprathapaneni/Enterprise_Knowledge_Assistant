@@ -106,12 +106,12 @@ def document_intelligence_page():
         if conflicts:
             for conf in conflicts:
                 st.markdown(f"""
-                    <div class="ai-card" style="margin-bottom: 14px; border-left: 4px solid #ef4444;">
-                        <div style="font-weight: 700; color: #ef4444; font-size: 1rem;">
+                    <div class="ai-card" style="margin-bottom: 14px; border-left: 3px solid #ef4444;">
+                        <div style="font-weight: 700; color: #ef4444; font-size: 1rem; margin-bottom: 6px;">
                             ⚠️ Conflict Topic: {conf['topic']} <span class="ai-badge badge-amber">{conf['severity']} Severity</span>
                         </div>
-                        <p style="margin: 8px 0; color: #cbd5e1; font-size: 0.9rem;">{conf['description']}</p>
-                        <div style="font-size: 0.8rem; color: #94a3b8;">
+                        <p class="ai-body" style="margin: 6px 0;">{conf['description']}</p>
+                        <div class="ai-meta">
                             <b>Document A:</b> <code>{conf['doc_a']}</code> &nbsp;|&nbsp; <b>Document B:</b> <code>{conf['doc_b']}</code>
                         </div>
                     </div>
@@ -141,11 +141,11 @@ def document_intelligence_page():
             for g in gaps:
                 st.markdown(f"""
                     <div class="ai-card" style="margin-bottom: 12px;">
-                        <div style="display: flex; justify-content: space-between; align-items: center;">
-                            <span style="font-weight: 700; color: #6366f1;">Missing Domain: {g['topic']}</span>
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                            <span class="ai-title" style="font-size: 0.98rem; margin: 0;">Missing Domain: {g['topic']}</span>
                             <span class="ai-badge badge-amber">Impact: {g['impact']}</span>
                         </div>
-                        <p style="font-size: 0.85rem; color: #94a3b8; margin: 6px 0 0 0;">
+                        <p class="ai-body" style="font-size: 0.88rem; margin: 4px 0 0 0;">
                             <b>Recommendation:</b> {g['rec']}
                         </p>
                     </div>

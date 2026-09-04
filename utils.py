@@ -2,109 +2,151 @@ import streamlit as st
 from database import get_db_status
 
 def get_current_theme():
-    return st.session_state.get("theme", "Light")
+    return st.session_state.get("theme", "Dark")
 
 def load_css():
-    """Injects high-end, responsive styling with glassmorphic cards, luminous gradients, and interactive animations."""
+    """Injects high-end, responsive styling with classic executive cards, pristine contrast, and institutional elegance."""
     theme = get_current_theme()
 
     if theme == "Dark":
         css = """
-        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
 
-        /* Global Canvas - Cyber-Executive Dark */
+        /* Global Canvas - Classic Executive Obsidian */
         .stApp {
-            background: radial-gradient(circle at 50% -10%, #17153b 0%, #0d111c 45%, #07090e 100%) !important;
-            color: #f1f5f9;
-            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: radial-gradient(circle at 50% 0%, #151d30 0%, #0b0f19 55%, #07090e 100%) !important;
+            color: #e2e8f0 !important;
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            -webkit-font-smoothing: antialiased;
         }
 
-        /* Glassmorphic Cyber Cards */
+        /* Typography & Contrast Enforcements */
+        h1, h2, h3, h4, h5, h6 {
+            color: #ffffff !important;
+            font-weight: 700 !important;
+            letter-spacing: -0.02em;
+        }
+        p, li, span, label {
+            color: #e2e8f0;
+        }
+        .stCaption, caption, small {
+            color: #94a3b8 !important;
+            font-size: 0.82rem;
+        }
+
+        /* Classic Executive Cards (No cheap neon rainbow stripes) */
         .ai-card {
-            background: rgba(17, 24, 39, 0.72);
-            border: 1px solid rgba(99, 102, 241, 0.22);
-            border-radius: 16px;
-            padding: 22px 24px;
-            backdrop-filter: blur(20px);
-            box-shadow: 0 12px 32px -8px rgba(0, 0, 0, 0.6), inset 0 1px 1px rgba(255, 255, 255, 0.08);
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            background: rgba(17, 24, 39, 0.85);
+            border: 1px solid rgba(255, 255, 255, 0.09);
+            border-radius: 12px;
+            padding: 20px 24px;
+            backdrop-filter: blur(16px);
+            box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.4), inset 0 1px 0 0 rgba(255, 255, 255, 0.06);
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
             position: relative;
-            overflow: hidden;
         }
         .ai-card:hover {
-            transform: translateY(-3px);
-            border-color: rgba(129, 140, 248, 0.55);
-            box-shadow: 0 20px 40px -12px rgba(99, 102, 241, 0.35);
-        }
-        .ai-card::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, #6366f1, #a855f7, #06b6d4);
+            border-color: rgba(99, 102, 241, 0.45);
+            box-shadow: 0 8px 28px -4px rgba(0, 0, 0, 0.55);
         }
 
+        /* Theme Adaptive Text Helpers */
+        .ai-title {
+            color: #ffffff !important;
+            font-weight: 700;
+            font-size: 1.15rem;
+            margin: 0 0 6px 0;
+            letter-spacing: -0.01em;
+        }
+        .ai-body {
+            color: #cbd5e1 !important;
+            font-size: 0.92rem;
+            line-height: 1.55;
+            margin: 0 0 10px 0;
+        }
+        .ai-subtitle {
+            color: #94a3b8 !important;
+            font-size: 0.84rem;
+            line-height: 1.45;
+        }
+        .ai-meta {
+            color: #64748b !important;
+            font-size: 0.78rem;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .ai-callout {
+            background: rgba(30, 41, 59, 0.6);
+            border-left: 3px solid #3b82f6;
+            border-radius: 6px;
+            padding: 10px 14px;
+            margin: 8px 0;
+            color: #cbd5e1;
+            font-size: 0.88rem;
+        }
+
+        /* Metric Typography */
         .ai-metric-label {
             font-size: 0.72rem;
             color: #94a3b8;
             text-transform: uppercase;
-            letter-spacing: 0.1em;
+            letter-spacing: 0.08em;
             font-weight: 700;
+            display: block;
         }
         .ai-metric-value {
-            font-size: 2.1rem;
+            font-size: 2rem;
             font-weight: 800;
-            background: linear-gradient(135deg, #ffffff 10%, #c7d2fe 90%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin: 6px 0;
+            color: #ffffff !important;
+            margin: 4px 0 6px 0;
             letter-spacing: -0.02em;
+            font-family: 'Plus Jakarta Sans', sans-serif;
         }
 
-        /* Glowing Badges */
+        /* Classic Refined Badges (No tacky glowing shadows) */
         .ai-badge {
             font-size: 0.72rem;
-            font-weight: 700;
-            padding: 4px 12px;
-            border-radius: 9999px;
+            font-weight: 600;
+            padding: 3px 10px;
+            border-radius: 6px;
             display: inline-flex;
             align-items: center;
-            gap: 6px;
+            gap: 5px;
             letter-spacing: 0.02em;
         }
         .badge-active { 
-            background: rgba(16, 185, 129, 0.15); 
+            background: rgba(16, 185, 129, 0.14); 
             color: #34d399; 
-            border: 1px solid rgba(16, 185, 129, 0.35); 
-            box-shadow: 0 0 12px rgba(16, 185, 129, 0.2);
+            border: 1px solid rgba(16, 185, 129, 0.3); 
         }
         .badge-indigo { 
-            background: rgba(99, 102, 241, 0.18); 
-            color: #a5b4fc; 
-            border: 1px solid rgba(99, 102, 241, 0.4); 
-            box-shadow: 0 0 12px rgba(99, 102, 241, 0.2);
+            background: rgba(59, 130, 246, 0.14); 
+            color: #93c5fd; 
+            border: 1px solid rgba(59, 130, 246, 0.3); 
         }
         .badge-purple { 
-            background: rgba(168, 85, 247, 0.18); 
-            color: #d8b4fe; 
-            border: 1px solid rgba(168, 85, 247, 0.4); 
-            box-shadow: 0 0 12px rgba(168, 85, 247, 0.2);
+            background: rgba(139, 92, 246, 0.14); 
+            color: #c4b5fd; 
+            border: 1px solid rgba(139, 92, 246, 0.3); 
         }
-        .badge-amber {
-            background: rgba(245, 158, 11, 0.15); 
+        .badge-amber { 
+            background: rgba(245, 158, 11, 0.14); 
             color: #fbbf24; 
-            border: 1px solid rgba(245, 158, 11, 0.35);
+            border: 1px solid rgba(245, 158, 11, 0.3); 
+        }
+        .badge-danger { 
+            background: rgba(239, 68, 68, 0.14); 
+            color: #f87171; 
+            border: 1px solid rgba(239, 68, 68, 0.3); 
         }
 
-        /* Top Header Navigation Banner */
+        /* Top Executive Header Banner */
         .app-header-banner {
-            background: linear-gradient(135deg, rgba(30, 27, 75, 0.75) 0%, rgba(17, 24, 39, 0.85) 100%);
-            border: 1px solid rgba(99, 102, 241, 0.25);
-            border-radius: 18px;
-            padding: 20px 28px;
+            background: #111827;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 18px 24px;
             margin-bottom: 24px;
-            backdrop-filter: blur(24px);
-            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 4px 16px -2px rgba(0, 0, 0, 0.3);
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -113,161 +155,271 @@ def load_css():
         }
         .app-header-banner .title-area h1 {
             margin: 0;
-            font-size: 1.85rem;
+            font-size: 1.65rem;
             font-weight: 800;
-            background: linear-gradient(135deg, #ffffff 20%, #a5b4fc 70%, #c084fc 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: #ffffff !important;
             letter-spacing: -0.02em;
         }
         .app-header-banner .title-area p {
             margin: 4px 0 0 0;
-            color: #94a3b8;
-            font-size: 0.88rem;
+            color: #94a3b8 !important;
+            font-size: 0.85rem;
         }
         .header-telemetry-chips {
             display: flex;
-            gap: 10px;
+            gap: 8px;
             flex-wrap: wrap;
             align-items: center;
         }
         .telemetry-chip {
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            padding: 6px 12px;
-            font-size: 0.75rem;
-            color: #cbd5e1;
+            border-radius: 6px;
+            padding: 5px 11px;
+            font-size: 0.74rem;
+            color: #e2e8f0;
+            font-weight: 500;
+            font-family: 'JetBrains Mono', monospace;
             display: flex;
             align-items: center;
             gap: 6px;
         }
 
-        /* Tabs Styling */
+        /* Executive Segmented Tabs */
         .stTabs [data-baseweb="tab-list"] {
-            gap: 10px;
+            gap: 6px;
             background-color: transparent;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-            padding-bottom: 8px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.09);
+            padding-bottom: 6px;
         }
         .stTabs [data-baseweb="tab"] {
-            height: 42px;
-            border-radius: 10px;
-            background-color: rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            height: 38px;
+            border-radius: 8px;
+            background-color: transparent;
+            border: 1px solid transparent;
             color: #94a3b8;
-            padding: 0 20px;
+            padding: 0 16px;
             font-weight: 600;
-            font-size: 0.88rem;
-            transition: all 0.2s ease;
+            font-size: 0.85rem;
+            transition: all 0.15s ease;
         }
         .stTabs [data-baseweb="tab"]:hover {
             color: #ffffff;
-            border-color: rgba(99, 102, 241, 0.4);
-            background-color: rgba(99, 102, 241, 0.12);
+            background-color: rgba(255, 255, 255, 0.05);
         }
         .stTabs [aria-selected="true"] {
-            background: linear-gradient(135deg, rgba(99, 102, 241, 0.3), rgba(168, 85, 247, 0.25)) !important;
-            border-color: rgba(129, 140, 248, 0.7) !important;
+            background: #1e293b !important;
+            border: 1px solid rgba(255, 255, 255, 0.15) !important;
             color: #ffffff !important;
-            box-shadow: 0 4px 16px rgba(99, 102, 241, 0.25) !important;
         }
 
-        /* Streamlit Buttons */
+        /* Streamlit Input Controls - Guaranteed Crisp Visibility */
+        .stTextInput input, .stTextArea textarea {
+            background-color: #131b2e !important;
+            color: #ffffff !important;
+            border: 1px solid #2b3b55 !important;
+            border-radius: 8px !important;
+            font-size: 0.92rem !important;
+        }
+        .stTextInput input:focus, .stTextArea textarea:focus {
+            border-color: #3b82f6 !important;
+            box-shadow: 0 0 0 1px #3b82f6 !important;
+        }
+        div[data-baseweb="select"] > div {
+            background-color: #131b2e !important;
+            border: 1px solid #2b3b55 !important;
+            color: #ffffff !important;
+            border-radius: 8px !important;
+        }
+        div[data-baseweb="select"] span {
+            color: #ffffff !important;
+        }
+
+        /* Streamlit Native Buttons - Authoritative Executive Styling */
         .stButton > button {
-            border-radius: 10px;
+            border-radius: 8px;
             font-weight: 600;
-            transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.88rem;
+            padding: 8px 16px;
+            transition: all 0.15s ease;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            background-color: #1a2234;
+            color: #f1f5f9;
         }
         .stButton > button:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 6px 18px rgba(99, 102, 241, 0.25);
+            background-color: #243048;
+            border-color: rgba(255, 255, 255, 0.25);
+            color: #ffffff;
+        }
+        .stButton > button[kind="primary"] {
+            background-color: #2563eb !important;
+            border-color: #3b82f6 !important;
+            color: #ffffff !important;
+        }
+        .stButton > button[kind="primary"]:hover {
+            background-color: #1d4ed8 !important;
+            border-color: #60a5fa !important;
         }
 
         /* Sidebar Styling */
         section[data-testid="stSidebar"] {
-            background-color: #0b0f19 !important;
+            background-color: #080c14 !important;
             border-right: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        section[data-testid="stSidebar"] p, section[data-testid="stSidebar"] span {
+            color: #cbd5e1;
+        }
+
+        /* Streamlit Expanders */
+        div[data-testid="stExpander"] {
+            border: 1px solid rgba(255, 255, 255, 0.09) !important;
+            border-radius: 8px !important;
+            background: rgba(17, 24, 39, 0.5) !important;
+        }
+        div[data-testid="stExpander"] summary span {
+            color: #f1f5f9 !important;
+            font-weight: 600 !important;
         }
         """
     else:
-        # PRISTINE EXECUTIVE LIGHT THEME
+        # PRISTINE ARCHITECTURAL EXECUTIVE LIGHT THEME
         css = """
-        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
 
         /* Global Canvas - Executive Light */
         .stApp {
-            background: radial-gradient(circle at 50% -5%, #eef2ff 0%, #f8fafc 40%, #ffffff 100%) !important;
-            color: #0f172a;
-            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #f8fafc !important;
+            color: #0f172a !important;
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            -webkit-font-smoothing: antialiased;
         }
 
-        /* Glassmorphic Light Cards */
+        /* Typography & Contrast Enforcements */
+        h1, h2, h3, h4, h5, h6 {
+            color: #0f172a !important;
+            font-weight: 700 !important;
+            letter-spacing: -0.02em;
+        }
+        p, li, span, label {
+            color: #1e293b;
+        }
+        .stCaption, caption, small {
+            color: #475569 !important;
+            font-size: 0.82rem;
+        }
+
+        /* Classic Executive Cards */
         .ai-card {
             background: #ffffff;
-            border: 1px solid rgba(226, 232, 240, 0.95);
-            border-radius: 16px;
-            padding: 22px 26px;
-            box-shadow: 0 10px 25px -5px rgba(99, 102, 241, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.02);
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 20px 24px;
+            box-shadow: 0 1px 3px 0 rgba(15, 23, 42, 0.05), 0 1px 2px -1px rgba(15, 23, 42, 0.05);
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
             position: relative;
-            overflow: hidden;
         }
         .ai-card:hover {
-            transform: translateY(-3px);
-            border-color: rgba(99, 102, 241, 0.45);
-            box-shadow: 0 18px 35px -8px rgba(99, 102, 241, 0.18);
-        }
-        .ai-card::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, #4f46e5, #7c3aed, #0284c7);
+            border-color: #cbd5e1;
+            box-shadow: 0 8px 24px -4px rgba(15, 23, 42, 0.08);
         }
 
+        /* Theme Adaptive Text Helpers */
+        .ai-title {
+            color: #0f172a !important;
+            font-weight: 700;
+            font-size: 1.15rem;
+            margin: 0 0 6px 0;
+            letter-spacing: -0.01em;
+        }
+        .ai-body {
+            color: #1e293b !important;
+            font-size: 0.92rem;
+            line-height: 1.55;
+            margin: 0 0 10px 0;
+        }
+        .ai-subtitle {
+            color: #475569 !important;
+            font-size: 0.84rem;
+            line-height: 1.45;
+        }
+        .ai-meta {
+            color: #64748b !important;
+            font-size: 0.78rem;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .ai-callout {
+            background: #f1f5f9;
+            border-left: 3px solid #2563eb;
+            border-radius: 6px;
+            padding: 10px 14px;
+            margin: 8px 0;
+            color: #1e293b;
+            font-size: 0.88rem;
+        }
+
+        /* Metric Typography */
         .ai-metric-label {
             font-size: 0.72rem;
             color: #64748b;
             text-transform: uppercase;
-            letter-spacing: 0.1em;
+            letter-spacing: 0.08em;
             font-weight: 700;
+            display: block;
         }
         .ai-metric-value {
-            font-size: 2.1rem;
+            font-size: 2rem;
             font-weight: 800;
-            background: linear-gradient(135deg, #1e1b4b 0%, #4338ca 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin: 6px 0;
+            color: #0f172a !important;
+            margin: 4px 0 6px 0;
             letter-spacing: -0.02em;
+            font-family: 'Plus Jakarta Sans', sans-serif;
         }
 
         /* Clean Light Badges */
         .ai-badge {
             font-size: 0.72rem;
-            font-weight: 700;
-            padding: 4px 12px;
-            border-radius: 9999px;
+            font-weight: 600;
+            padding: 3px 10px;
+            border-radius: 6px;
             display: inline-flex;
             align-items: center;
-            gap: 6px;
+            gap: 5px;
             letter-spacing: 0.02em;
         }
-        .badge-active { background: #ecfdf5; color: #047857; border: 1px solid #a7f3d0; }
-        .badge-indigo { background: #eef2ff; color: #4338ca; border: 1px solid #c7d2fe; }
-        .badge-purple { background: #faf5ff; color: #6b21a8; border: 1px solid #e9d5ff; }
-        .badge-amber { background: #fffbeb; color: #b45309; border: 1px solid #fde68a; }
+        .badge-active { 
+            background: #ecfdf5; 
+            color: #065f46; 
+            border: 1px solid #a7f3d0; 
+        }
+        .badge-indigo { 
+            background: #eff6ff; 
+            color: #1e40af; 
+            border: 1px solid #bfdbfe; 
+        }
+        .badge-purple { 
+            background: #f5f3ff; 
+            color: #5b21b6; 
+            border: 1px solid #ddd6fe; 
+        }
+        .badge-amber { 
+            background: #fffbeb; 
+            color: #92400e; 
+            border: 1px solid #fde68a; 
+        }
+        .badge-danger { 
+            background: #fef2f2; 
+            color: #991b1b; 
+            border: 1px solid #fecaca; 
+        }
 
-        /* Top Header Navigation Banner */
+        /* Top Executive Header Banner */
         .app-header-banner {
-            background: linear-gradient(135deg, rgba(240, 243, 255, 0.95) 0%, rgba(250, 245, 255, 0.95) 100%);
-            border: 1px solid rgba(199, 210, 254, 0.75);
-            border-radius: 18px;
-            padding: 20px 28px;
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 18px 24px;
             margin-bottom: 24px;
-            box-shadow: 0 10px 25px -8px rgba(99, 102, 241, 0.08);
+            box-shadow: 0 1px 3px 0 rgba(15, 23, 42, 0.05);
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -276,84 +428,130 @@ def load_css():
         }
         .app-header-banner .title-area h1 {
             margin: 0;
-            font-size: 1.85rem;
+            font-size: 1.65rem;
             font-weight: 800;
-            background: linear-gradient(135deg, #1e1b4b 0%, #4338ca 70%, #6d28d9 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: #0f172a !important;
             letter-spacing: -0.02em;
         }
         .app-header-banner .title-area p {
             margin: 4px 0 0 0;
-            color: #475569;
-            font-size: 0.88rem;
+            color: #475569 !important;
+            font-size: 0.85rem;
             font-weight: 500;
         }
         .header-telemetry-chips {
             display: flex;
-            gap: 10px;
+            gap: 8px;
             flex-wrap: wrap;
             align-items: center;
         }
         .telemetry-chip {
-            background: #ffffff;
+            background: #f8fafc;
             border: 1px solid #e2e8f0;
-            border-radius: 10px;
-            padding: 6px 12px;
-            font-size: 0.75rem;
-            color: #475569;
+            border-radius: 6px;
+            padding: 5px 11px;
+            font-size: 0.74rem;
+            color: #334155;
             font-weight: 600;
+            font-family: 'JetBrains Mono', monospace;
             display: flex;
             align-items: center;
             gap: 6px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
         }
 
         /* Tabs Styling */
         .stTabs [data-baseweb="tab-list"] {
-            gap: 10px;
+            gap: 6px;
             background-color: transparent;
             border-bottom: 1px solid #e2e8f0;
-            padding-bottom: 8px;
+            padding-bottom: 6px;
         }
         .stTabs [data-baseweb="tab"] {
-            height: 42px;
-            border-radius: 10px;
-            background-color: #f1f5f9;
-            border: 1px solid #e2e8f0;
+            height: 38px;
+            border-radius: 8px;
+            background-color: transparent;
+            border: 1px solid transparent;
             color: #64748b;
-            padding: 0 22px;
+            padding: 0 16px;
             font-weight: 600;
-            font-size: 0.88rem;
-            transition: all 0.2s ease;
+            font-size: 0.85rem;
+            transition: all 0.15s ease;
         }
         .stTabs [data-baseweb="tab"]:hover {
-            color: #4338ca;
-            background-color: #e0e7ff;
-            border-color: #c7d2fe;
+            color: #0f172a;
+            background-color: #f1f5f9;
         }
         .stTabs [aria-selected="true"] {
             background-color: #ffffff !important;
-            border-color: #6366f1 !important;
-            color: #4338ca !important;
-            box-shadow: 0 4px 14px rgba(99, 102, 241, 0.15) !important;
+            border: 1px solid #cbd5e1 !important;
+            color: #0f172a !important;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05) !important;
         }
 
-        /* Streamlit Buttons */
+        /* Streamlit Input Controls - Guaranteed Crisp Visibility */
+        .stTextInput input, .stTextArea textarea {
+            background-color: #ffffff !important;
+            color: #0f172a !important;
+            border: 1px solid #cbd5e1 !important;
+            border-radius: 8px !important;
+            font-size: 0.92rem !important;
+        }
+        .stTextInput input:focus, .stTextArea textarea:focus {
+            border-color: #2563eb !important;
+            box-shadow: 0 0 0 1px #2563eb !important;
+        }
+        div[data-baseweb="select"] > div {
+            background-color: #ffffff !important;
+            border: 1px solid #cbd5e1 !important;
+            color: #0f172a !important;
+            border-radius: 8px !important;
+        }
+        div[data-baseweb="select"] span {
+            color: #0f172a !important;
+        }
+
+        /* Streamlit Native Buttons */
         .stButton > button {
-            border-radius: 10px;
+            border-radius: 8px;
             font-weight: 600;
-            transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+            font-size: 0.88rem;
+            padding: 8px 16px;
+            transition: all 0.15s ease;
+            border: 1px solid #cbd5e1;
+            background-color: #ffffff;
+            color: #0f172a;
         }
         .stButton > button:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 6px 16px rgba(99, 102, 241, 0.18);
+            background-color: #f8fafc;
+            border-color: #94a3b8;
+        }
+        .stButton > button[kind="primary"] {
+            background-color: #1d4ed8 !important;
+            border-color: #1e40af !important;
+            color: #ffffff !important;
+        }
+        .stButton > button[kind="primary"]:hover {
+            background-color: #1e40af !important;
         }
 
         /* Sidebar Styling */
         section[data-testid="stSidebar"] {
             background-color: #ffffff !important;
             border-right: 1px solid #e2e8f0;
+        }
+        section[data-testid="stSidebar"] p, section[data-testid="stSidebar"] span {
+            color: #1e293b;
+        }
+
+        /* Streamlit Expanders */
+        div[data-testid="stExpander"] {
+            border: 1px solid #e2e8f0 !important;
+            border-radius: 8px !important;
+            background: #ffffff !important;
+        }
+        div[data-testid="stExpander"] summary span {
+            color: #0f172a !important;
+            font-weight: 600 !important;
         }
         """
 
@@ -366,13 +564,13 @@ def app_header():
     db_stat = get_db_status()
     is_cloud = "ONLINE" in db_stat.get("firebase_status", "")
     
-    cloud_badge = "🟢 Cloud Synced" if is_cloud else "💾 Local Database"
+    cloud_badge = "🟢 Cloud Synced" if is_cloud else "💾 Local SQLite"
 
     st.markdown(f"""
         <div class="app-header-banner">
             <div class="title-area">
                 <h1>⚡ Enterprise Cognitive Knowledge Assistant</h1>
-                <p>Retrieval-Augmented Neural Discovery • TF-IDF Lucene Semantic Engine • Cloud Firestore Sync</p>
+                <p>Multi-Agent Cognitive Operating System • Dual-Mode SQLite & Cloud Firestore • Sub-Second Latency</p>
             </div>
             <div class="header-telemetry-chips">
                 <div class="telemetry-chip">📁 <b>{docs_cnt}</b> Documents</div>

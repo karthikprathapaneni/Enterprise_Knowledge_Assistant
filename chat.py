@@ -50,10 +50,10 @@ def chat_page():
     if not st.session_state.messages:
         st.markdown("""
             <div class="ai-card" style="margin-bottom: 20px;">
-                <div style="font-weight: 800; font-size: 1.1rem; color: #6366f1; margin-bottom: 6px;">
+                <div class="ai-title" style="font-size: 1.1rem; margin-bottom: 6px;">
                     ✨ Cognitive Copilot 2.0 Ready
                 </div>
-                <p style="color: #94a3b8; font-size: 0.9rem; margin: 0;">
+                <p class="ai-body" style="margin: 0;">
                     Your request will be dynamically classified and routed to the optimal specialized enterprise agent:
                     <b>Knowledge</b>, <b>Policy Compliance</b>, <b>Troubleshooting Problem Solver</b>, <b>Text-to-SQL Data Analyst</b>, or <b>Task Agent</b>.
                 </p>

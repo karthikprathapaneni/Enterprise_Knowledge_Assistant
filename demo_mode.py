@@ -93,12 +93,12 @@ def demo_mode_page():
     # Card
     st.markdown(f"""
         <div class="ai-card" style="padding: 24px 30px; margin-bottom: 20px;">
-            <div style="font-size: 0.8rem; font-weight: 700; color: #818cf8; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 6px;">
+            <div class="ai-badge badge-indigo" style="margin-bottom: 8px;">
                 MILESTONE {curr_step['step']} OF 10
             </div>
-            <h2 style="margin: 0 0 10px 0; font-size: 1.6rem; color: #ffffff;">{curr_step['title']}</h2>
-            <p style="font-size: 1.05rem; color: #cbd5e1; line-height: 1.5; margin-bottom: 16px;">{curr_step['desc']}</p>
-            <div style="background: rgba(99, 102, 241, 0.15); border: 1px solid rgba(99, 102, 241, 0.3); border-radius: 10px; padding: 12px 16px; color: #a5b4fc; font-size: 0.9rem;">
+            <h2 class="ai-title" style="font-size: 1.6rem; margin: 0 0 10px 0;">{curr_step['title']}</h2>
+            <p class="ai-body" style="font-size: 1.02rem; margin-bottom: 16px;">{curr_step['desc']}</p>
+            <div class="ai-callout">
                 👉 <b>Live Showcase Portal:</b> <code>{curr_step['portal']}</code> — {curr_step['action_text']}
             </div>
         </div>

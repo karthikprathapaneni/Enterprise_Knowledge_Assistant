@@ -91,30 +91,21 @@ def decision_center_page():
         # Delineation of Fact vs Inference vs Recommendation
         col_f, col_i, col_r = st.columns(3)
         with col_f:
-            st.markdown("""
-                <div class="ai-card" style="border-top: 3px solid #10b981;">
-                    <div style="font-weight: 700; color: #10b981; font-size: 0.9rem; margin-bottom: 8px;">🟢 VERIFIED FACTS [EVIDENCE]</div>
-            """, unsafe_allow_html=True)
-            for f in dec["facts"]:
-                st.markdown(f"• {f}")
-            st.markdown("</div>", unsafe_allow_html=True)
+            with st.container(border=True):
+                st.markdown('<span class="ai-badge badge-active" style="margin-bottom: 8px;">🟢 VERIFIED FACTS [EVIDENCE]</span>', unsafe_allow_html=True)
+                for f in dec["facts"]:
+                    st.markdown(f"• {f}")
 
         with col_i:
-            st.markdown("""
-                <div class="ai-card" style="border-top: 3px solid #6366f1;">
-                    <div style="font-weight: 700; color: #6366f1; font-size: 0.9rem; margin-bottom: 8px;">🔵 REASONED INFERENCES [ANALYSIS]</div>
-            """, unsafe_allow_html=True)
-            for inf in dec["inferences"]:
-                st.markdown(f"• {inf}")
-            st.markdown("</div>", unsafe_allow_html=True)
+            with st.container(border=True):
+                st.markdown('<span class="ai-badge badge-indigo" style="margin-bottom: 8px;">🔵 REASONED INFERENCES [ANALYSIS]</span>', unsafe_allow_html=True)
+                for inf in dec["inferences"]:
+                    st.markdown(f"• {inf}")
 
         with col_r:
-            st.markdown("""
-                <div class="ai-card" style="border-top: 3px solid #ec4899;">
-                    <div style="font-weight: 700; color: #ec4899; font-size: 0.9rem; margin-bottom: 8px;">🟣 STRATEGIC RECOMMENDATION</div>
-            """, unsafe_allow_html=True)
-            st.markdown(dec["recommendation"])
-            st.markdown("</div>", unsafe_allow_html=True)
+            with st.container(border=True):
+                st.markdown('<span class="ai-badge badge-purple" style="margin-bottom: 8px;">🟣 STRATEGIC RECOMMENDATION</span>', unsafe_allow_html=True)
+                st.markdown(dec["recommendation"])
 
         st.write("")
         st.markdown("##### 🛡️ Human-In-The-Loop Governance:")

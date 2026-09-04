@@ -36,8 +36,8 @@ def admin_page():
         st.markdown(f"""
             <div class="ai-card">
                 <span class="ai-metric-label">AI Guard Interceptions</span>
-                <div class="ai-metric-value" style="color: {'#ef4444' if security_events else '#10b981'};">{len(security_events)}</div>
-                <span class="ai-badge {'badge-amber' if security_events else 'badge-active'}">Threat Firewall</span>
+                <div class="ai-metric-value" style="{'color: #ef4444 !important;' if security_events else ''}">{len(security_events)}</div>
+                <span class="ai-badge {'badge-danger' if security_events else 'badge-active'}">Threat Firewall</span>
             </div>
         """, unsafe_allow_html=True)
     with col2:
