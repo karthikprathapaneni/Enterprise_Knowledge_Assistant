@@ -41,7 +41,7 @@ class AIOrchestrator:
         return "KNOWLEDGE_QA"
 
     @classmethod
-    def dispatch(cls, query: str, user_profile: dict, rag_engine, persona: str = "Executive", top_k: int = 3, threshold: float = 0.03) -> dict:
+    def dispatch(cls, query: str, user_profile: dict, rag_engine=None, persona: str = "Executive", top_k: int = 3, threshold: float = 0.03) -> dict:
         t_start = time.time()
         username = user_profile.get("username", "user")
 
@@ -91,8 +91,13 @@ class AIOrchestrator:
         return res
 
     @classmethod
-    def _execute_problem_solver(cls, query: str, rag_engine, user_profile: dict, t_start: float) -> dict:
+    def _execute_problem_solver(cls, query: str, rag_engine=None, user_profile: dict = None, t_start: float = 0) -> dict:
         """Troubleshooting agent: generates root cause, confidence, step-by-step resolution, and escalation."""
+        if t_start == 0:
+            t_start = time.time()
+        if user_profile is None:
+            user_profile = {"username": "user", "clearance_level": 1}
+
         matches = rag_engine.retrieve(query, top_k=3, threshold=0.02) if rag_engine else []
         latency_ms = round((time.time() - t_start) * 1000, 1)
 
@@ -159,8 +164,12 @@ If steps 1–4 fail to restore operations, escalate immediately to **Enterprise 
         }
 
     @classmethod
-    def _execute_data_analyst(cls, query: str, user_profile: dict, t_start: float) -> dict:
+    def _execute_data_analyst(cls, query: str, user_profile: dict = None, t_start: float = 0) -> dict:
         """Safe Text-to-SQL compiler with dynamic Plotly chart generation."""
+        if t_start == 0:
+            t_start = time.time()
+        if user_profile is None:
+            user_profile = {"username": "user", "clearance_level": 1}
         q_low = query.lower()
 
         # Deterministic SQL generation based on query semantics

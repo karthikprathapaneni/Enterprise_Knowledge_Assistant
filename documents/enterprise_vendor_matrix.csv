@@ -1,0 +1,6 @@
+vendor_id,vendor_name,service_category,annual_contract_value,sla_uptime,compliance_status,support_tier
+VND-101,Cloudflare Enterprise,DDoS & Edge CDN,₹420000,99.99%,SOC2 Type II Certified,24x7 Dedicated TAM
+VND-102,CrowdStrike Falcon,Endpoint EDR Security,₹680000,99.95%,ISO 27001 Certified,Mission Critical Priority
+VND-103,Datadog Observability,APM & Log Analytics,₹510000,99.90%,HIPAA / GDPR Compliant,Standard Enterprise
+VND-104,Workday HCM,Core HR & Payroll,₹890000,99.95%,FedRAMP Certified,Executive Gold Support
+VND-105,Snowflake Data Cloud,Enterprise Data Warehouse,₹940000,99.99%,SOC2 / PCI-DSS Certified,Premier Dedicated

@@ -83,7 +83,7 @@ def dashboard_page():
                 "Select Ingestion Source",
                 [
                     "⚡ 1-Click Vault Repository Ingest",
-                    "📤 Upload Custom Files (PDF / TXT / MD)",
+                    "📤 Upload Custom Files (PDF / DOCX / XLSX / CSV / TXT / MD)",
                     "📝 Paste Knowledge Context / Executive Brief"
                 ],
                 horizontal=False
@@ -98,7 +98,7 @@ def dashboard_page():
                     selected_files = []
                     for f_info in repo_files:
                         is_checked = st.checkbox(
-                            f"**{f_info['filename']}** ({f_info['size_kb']} KB)", 
+                            f"**{f_info['filename']}** ({f_info.get('ext', 'DOC')}) • {f_info['size_kb']} KB", 
                             value=True,
                             key=f"repo_chk_{f_info['filename']}"
                         )
@@ -139,7 +139,7 @@ def dashboard_page():
             elif "Upload Custom" in ingest_mode:
                 uploaded_files = st.file_uploader(
                     "Drop documents here for instant semantic vectorization",
-                    type=["pdf", "txt", "md"],
+                    type=["pdf", "docx", "xlsx", "csv", "txt", "md"],
                     accept_multiple_files=True
                 )
 

@@ -2,6 +2,7 @@ import streamlit as st
 import plotly.express as px
 from orchestrator import AIOrchestrator
 from database import save_chat, get_user_profile
+from voice_assistant import render_audio_narration, render_voice_input_button
 
 def chat_page():
     # Top Copilot Header & Utilities
@@ -60,7 +61,9 @@ def chat_page():
             </div>
         """, unsafe_allow_html=True)
 
-    # Prompt Accelerator Matrix
+    # Voice Dictation & Query Accelerators
+    render_voice_input_button()
+
     st.markdown("##### ⚡ Multi-Agent Query Accelerators:")
     qc1, qc2, qc3, qc4 = st.columns(4)
     quick_query = None
@@ -76,12 +79,16 @@ def chat_page():
     st.write("")
 
     # Render Chat Stream
-    for msg in st.session_state.messages:
+    for msg_idx, msg in enumerate(st.session_state.messages):
         with st.chat_message(msg["role"]):
             if "agent_name" in msg and msg["agent_name"]:
                 st.caption(f"Agent: **{msg['agent_name']}**")
             st.markdown(msg["content"])
             
+            # Inline Speech Narration for Assistant responses
+            if msg["role"] == "assistant":
+                render_audio_narration(msg["content"], label="🔊 Listen to Briefing", key=f"chat_tts_{msg_idx}")
+
             # Render structured chart if present
             if msg.get("structured_data") is not None and not msg["structured_data"].empty:
                 df = msg["structured_data"]
@@ -144,6 +151,7 @@ def chat_page():
         with st.chat_message("assistant"):
             st.caption(f"Agent: **{agent_name}** • Observability Trace: `{trace_id}`")
             st.markdown(answer_text)
+            render_audio_narration(answer_text, label="🔊 Listen to Briefing", key=f"chat_tts_live_{len(st.session_state.messages)}")
 
             if struct_data is not None and not struct_data.empty:
                 if "department" in struct_data.columns and "total_amount" in struct_data.columns:
