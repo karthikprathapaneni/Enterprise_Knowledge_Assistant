@@ -1,14 +1,22 @@
 import streamlit as st
-from database import init_db, get_db_status
+from database import init_db, get_db_status, get_user_profile
 from utils import load_css, app_header, get_current_theme
 from login import login_page, logout
+
+# Portals
+from command_center import command_center_page
+from personal_assistant import personal_assistant_page
 from dashboard import dashboard_page
 from chat import chat_page
+from problem_solver import problem_solver_page
+from document_intelligence_portal import document_intelligence_page
 from graph import knowledge_graph_page
+from data_analyst import data_analyst_page
+from decision_center import decision_center_page
 from admin import admin_page
 
 st.set_page_config(
-    page_title="Enterprise Cognitive Knowledge Assistant",
+    page_title="Enterprise Cognitive Knowledge Assistant 2.0",
     page_icon="⚡",
     layout="wide",
     initial_sidebar_state="expanded"
@@ -27,21 +35,28 @@ if "username" not in st.session_state:
 if "role" not in st.session_state:
     st.session_state.role = ""
 
+if "current_portal" not in st.session_state:
+    st.session_state.current_portal = "🏠 Command Center"
+
 init_db()
 load_css()
 
 if not st.session_state.logged_in:
     login_page()
 else:
+    username = st.session_state.username
+    profile = get_user_profile(username)
+    st.session_state.user_profile = profile
+
     st.sidebar.markdown("""
-        <div style="padding: 10px 0 16px 0;">
-            <span style="font-size: 1.3rem; font-weight: 800; background: linear-gradient(135deg, #6366f1, #a855f7); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">⚡ COGNITIVE AI</span>
-            <div style="font-size: 0.75rem; color: #94a3b8; margin-top: 2px;">Enterprise Knowledge Platform</div>
+        <div style="padding: 10px 0 14px 0;">
+            <span style="font-size: 1.25rem; font-weight: 800; background: linear-gradient(135deg, #6366f1, #a855f7); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">⚡ COGNITIVE 2.0</span>
+            <div style="font-size: 0.72rem; color: #94a3b8; margin-top: 2px;">Agentic Knowledge Platform</div>
         </div>
     """, unsafe_allow_html=True)
 
-    st.sidebar.markdown(f"👤 **User:** `{st.session_state.username}`")
-    st.sidebar.markdown(f"🔑 **Role:** `{st.session_state.role}`")
+    st.sidebar.markdown(f"👤 **{profile['full_name']}**")
+    st.sidebar.markdown(f"🏢 Dept: `{profile['department']}` • Clearance: `Tier {profile['clearance_level']}`")
 
     # DB Connection Status Indicator
     db_stat = get_db_status()
@@ -52,16 +67,31 @@ else:
 
     st.sidebar.markdown("---")
 
-    # 4 Streamlined Enterprise Portals
+    PORTAL_OPTIONS = [
+        "🏠 Command Center",
+        "🧠 My AI Assistant",
+        "📚 Knowledge Vault",
+        "💬 Cognitive Copilot",
+        "🛠️ AI Problem Solver",
+        "📄 Document Intelligence",
+        "🕸️ Knowledge Graph",
+        "📊 AI Data Analyst",
+        "🎯 Decision Center",
+        "🛡️ Governance & Security"
+    ]
+
+    # Sync selection with current_portal state
+    curr_idx = 0
+    if st.session_state.current_portal in PORTAL_OPTIONS:
+        curr_idx = PORTAL_OPTIONS.index(st.session_state.current_portal)
+
     page = st.sidebar.radio(
-        "Navigation",
-        [
-            "⚡ Neural Document Vault",
-            "💬 Cognitive Copilot",
-            "🕸️ Semantic Knowledge Graph",
-            "🛡️ Governance & Cloud Command"
-        ]
+        "Enterprise Portal",
+        PORTAL_OPTIONS,
+        index=curr_idx,
+        key="portal_navigation_radio"
     )
+    st.session_state.current_portal = page
 
     st.sidebar.markdown("---")
 
@@ -81,11 +111,24 @@ else:
     logout()
     app_header()
 
-    if page == "⚡ Neural Document Vault":
+    # Route to selected portal
+    if page == "🏠 Command Center":
+        command_center_page()
+    elif page == "🧠 My AI Assistant":
+        personal_assistant_page()
+    elif page == "📚 Knowledge Vault":
         dashboard_page()
     elif page == "💬 Cognitive Copilot":
         chat_page()
-    elif page == "🕸️ Semantic Knowledge Graph":
+    elif page == "🛠️ AI Problem Solver":
+        problem_solver_page()
+    elif page == "📄 Document Intelligence":
+        document_intelligence_page()
+    elif page == "🕸️ Knowledge Graph":
         knowledge_graph_page()
-    elif page == "🛡️ Governance & Cloud Command":
+    elif page == "📊 AI Data Analyst":
+        data_analyst_page()
+    elif page == "🎯 Decision Center":
+        decision_center_page()
+    elif page == "🛡️ Governance & Security":
         admin_page()
